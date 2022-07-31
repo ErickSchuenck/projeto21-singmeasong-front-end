@@ -7,14 +7,42 @@ const link = 'https://www.youtube.com/watch?v=nNhMjV76OQo'
 
 describe("Home page", () => {
 
+  const musicName = text;
+
   it('should create recommendation', () => {
     cy.visit('http://localhost:3000');
-    cy.get("#createRecommendationNameInput").type(`${text}`);
+    cy.get("#createRecommendationNameInput").type(`${musicName}`);
     cy.get("#createRecommendationLinkInput").type(link);
     cy.wait(1000);
     cy.get("#button").click();
   });
 
-  it("should return an alert when registering an existing recommendation", () => {
+  it("should alert when registering an existing recommendation", () => {
+    cy.get("#createRecommendationNameInput").type(`${musicName}`);
+    cy.get("#createRecommendationLinkInput").type(link);
+    cy.wait(1000);
+    cy.get("#button").click();
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal('Error creating recommendation!')
+    })
   });
+
+  it("should alert when trying to register an invalid recommendation", () => {
+    cy.get("#createRecommendationNameInput").type(`${musicName}`);
+    cy.get("#createRecommendationLinkInput").type(link);
+    cy.wait(1000);
+    cy.get("#button").click();
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal('Error creating recommendation!')
+    })
+  });
+
+  it("should upvote recommendation", () => {
+    cy.get("#upvoteButton 1").click();
+    cy.contains(musicName)
+      .get("article")
+      .within(() => {
+        cy.get("#Upvotes 1").should("have.text", "1")
+      });
+  })
 });
