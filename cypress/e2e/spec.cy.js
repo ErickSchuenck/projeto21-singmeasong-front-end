@@ -54,4 +54,14 @@ describe("Home page", () => {
         cy.get("#upvotes").first().should("have.text", "0")
       });
   });
+
+  it("should exclude recommendation", () => {
+
+    // it only works if database starts empty, should be fixed
+
+    for (let i = 0; i < 6; i++) {
+      cy.get("#downvoteButton").first().click();
+    }
+    cy.contains("No recommendations yet! Create your own :)");
+  });
 });
