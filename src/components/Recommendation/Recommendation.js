@@ -38,10 +38,10 @@ export default function Recommendation({ name, youtubeLink, score, id, onUpvote 
     <Container>
       <Row>{name}</Row>
       <ReactPlayer url={youtubeLink} width="100%" height="100%" />
-      <Row id={`Upvotes ${id}`}>
-        <GoArrowUp size="24px" id={`upvoteButton ${id}`} onClick={handleUpvote} />
+      <Row id={`upvotes`}>
+        <GoArrowUp size="24px" id={`upvoteButton`} onClick={handleUpvote} />
         {score}
-        <GoArrowDown size="24px" id={`downvoteButton ${id}`} onClick={handleDownvote} />
+        <GoArrowDown size="24px" id={`downvoteButton`} onClick={handleDownvote} />
       </Row>
     </Container>
   );

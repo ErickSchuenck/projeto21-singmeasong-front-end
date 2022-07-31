@@ -38,11 +38,20 @@ describe("Home page", () => {
   });
 
   it("should upvote recommendation", () => {
-    cy.get("#upvoteButton 1").click();
+    cy.get("#upvoteButton").first().click();
     cy.contains(musicName)
       .get("article")
       .within(() => {
-        cy.get("#Upvotes 1").should("have.text", "1")
+        cy.get("#upvotes").first().should("have.text", "1")
       });
-  })
+  });
+
+  it("should downvote recommendation", () => {
+    cy.get("#downvoteButton").first().click();
+    cy.contains(musicName)
+      .get("article")
+      .within(() => {
+        cy.get("#upvotes").first().should("have.text", "0")
+      });
+  });
 });
