@@ -4,15 +4,12 @@ import { faker } from "@faker-js/faker"
 const text = faker.music.songName()
 const link = 'https://www.youtube.com/watch?v=nNhMjV76OQo'
 
-// FIXME // not working right
-
-// beforeEach(() => {
-//   cy.resetDatabase();
-// });
-
 describe("Home page", () => {
 
   const musicName = text;
+  it('should clear test database', () => {
+    cy.request("POST", "http://localhost:5000/tests/reset", {});
+  });
 
   it('should create recommendation', () => {
     cy.visit('http://localhost:3000');
