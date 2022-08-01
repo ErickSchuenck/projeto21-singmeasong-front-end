@@ -61,8 +61,6 @@ describe("Home page", () => {
     for (let i = 0; i < 6; i++) {
       cy.get("#downvoteButton").first().click();
     }
-
-    // this line below only works if database starts empty, should be fixed
     cy.contains("No recommendations yet! Create your own :)");
   });
 });
@@ -71,7 +69,6 @@ describe('Random', () => {
   const musicName = text;
 
   it('should create a recommendation to be shown in the random recommendation suite', () => {
-    // cy.visit('http://localhost:3000');
     cy.get("#createRecommendationNameInput").type(`${musicName}`);
     cy.get("#createRecommendationLinkInput").type(link);
     cy.wait(1000);
